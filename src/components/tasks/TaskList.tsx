@@ -3,48 +3,12 @@ import TaskItem from "./TaskItem";
 import { List } from "@mui/material";
 import { Task } from "../../types/tasks/task";
 
-const dummyTasks: Task[] = [
-  {
-    id: 1,
-    title: "Create application",
-    description: "An ASP.NET application",
-    tags: "add, some, random, tags, here",
-    dateAdded: new Date(),
-    isCompleted: false,
-    dateCompleted: new Date(),
-    isRepeating: false,
-    priority: 2,
-  },
-  {
-    id: 2,
-    title: "Configure services",
-    description: "You need to do something, probably.",
-    tags: "add, some, random, tags, here",
-    dateAdded: new Date(),
-    isCompleted: false,
-    dateCompleted: new Date(),
-    isRepeating: false,
-    priority: 1,
-  },
-  {
-    id: 3,
-    title: "Define route mapping",
-    description: "The necessary routes for navigation and redirects.",
-    tags: "add, some, random, tags, here",
-    dateAdded: new Date(),
-    isCompleted: false,
-    dateCompleted: new Date(),
-    isRepeating: false,
-    priority: 1,
-  },
-];
-
 interface TaskListProps {
-  tasks: Task[];
+  data: Task[];
 }
 
-const TaskList: React.FC<TaskListProps> = () => {
-  const [tasks, setTasks] = useState(dummyTasks);
+const TaskList: React.FC<TaskListProps> = ( {data} ) => {
+  const [tasks, setTasks] = useState(data);
 
   const handleEditTask = (targetTask: Task) => {
     const targetTaskIndex: number = tasks
