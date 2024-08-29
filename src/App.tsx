@@ -44,7 +44,7 @@ const App = () => {
   return (
     <>
       <StandardLayout>
-        <TaskList />
+        <TaskList data={dummyTasks} />
       </StandardLayout>
       
     </>
