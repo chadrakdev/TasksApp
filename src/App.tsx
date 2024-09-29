@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import './App.css'
 import StandardLayout from './components/layout/StandardLayout'
 import TaskList from './components/tasks/TaskList'
-import { Task } from './types/tasks/task';
+import { TaskEntity } from './types/tasks/task';
 
-const dummyTasks: Task[] = [
+const dummyTasks: TaskEntity[] = [
   {
     id: 1,
     title: "Create application",
@@ -40,11 +41,12 @@ const dummyTasks: Task[] = [
 ];
 
 const App = () => {
+  const [tasks, setTasks] = useState<TaskEntity[]>(dummyTasks);
 
   return (
     <>
       <StandardLayout>
-        <TaskList data={dummyTasks} />
+        <TaskList tasks={tasks} />
       </StandardLayout>
       
     </>
