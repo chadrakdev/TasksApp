@@ -1,16 +1,23 @@
 import { useState } from "react";
 import TaskItem from "./TaskItem";
 import { List } from "@mui/material";
-import { Task } from "../../types/tasks/task";
+import { TaskEntity } from "../../types/tasks/task";
+import { Button } from "@mui/material";
+import TaskFormModal from "./TaskFormModal";
 
 interface TaskListProps {
-  data: Task[];
+  tasks: TaskEntity[];
 }
 
-const TaskList: React.FC<TaskListProps> = ( {data} ) => {
-  const [tasks, setTasks] = useState(data);
+const TaskList: React.FC<TaskListProps> = (props) => {
+  const [tasks, setTasks] = useState(props.tasks);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const handleEditTask = (targetTask: Task) => {
+  const handleAddTask = () => {
+    setModalIsOpen(true);
+  };
+
+  const handleEditTask = (targetTask: TaskEntity) => {
     const targetTaskIndex: number = tasks
       .map((task) => task.id)
       .indexOf(targetTask.id);
@@ -22,7 +29,7 @@ const TaskList: React.FC<TaskListProps> = ( {data} ) => {
     console.warn(`Removed task '${targetTask.title}'`);
   };
 
-  const handleDeleteTask = (targetTask: Task) => {
+  const handleDeleteTask = (targetTask: TaskEntity) => {
     const targetTaskIndex: number = tasks
       .map((task) => task.id)
       .indexOf(targetTask.id);
@@ -35,7 +42,18 @@ const TaskList: React.FC<TaskListProps> = ( {data} ) => {
   };
 
   return (
-    <List sx={{ display: "flex", flexDirection: "column" }}>
+    <div>
+      <TaskFormModal
+        isOpen={modalIsOpen}
+        onClose={() => setModalIsOpen(!modalIsOpen)}
+      />
+      <Button
+        variant="contained"
+        onClick={handleAddTask}
+      >
+        Add Task
+      </Button>
+      <List sx={{ display: "flex", flexDirection: "column" }}>
       {tasks.map((task) => (
         <TaskItem
           key={task.id}
@@ -45,6 +63,7 @@ const TaskList: React.FC<TaskListProps> = ( {data} ) => {
         />
       ))}
     </List>
+    </div>
   );
 };
 
