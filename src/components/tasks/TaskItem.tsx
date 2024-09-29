@@ -1,9 +1,9 @@
 import { Card, CardContent, Typography } from "@mui/material";
-import { Task } from "../../types/tasks/task";
+import { TaskEntity } from "../../types/tasks/task";
 import { Button } from "@mui/material";
 
 interface TaskItemProps {
-  task: Task;
+  task: TaskEntity;
   onEdit: () => void;
   onDelete: () => void;
 }
